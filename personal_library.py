@@ -60,10 +60,27 @@ def add_book(library):
     # print that the title was added to the library
     print(f"{title} was added to your library")
 
+def list_books(library):
+    '''
+    Displays all books that are in the library 
+
+    parameters: 
+        Library: A list containing book titles
+        
+    '''
+    if len(library) == 0:
+        # make this print statement is the there is nothing in the library
+        print("Your library is empty")
+    else:
+        for index in range(len(library)):
+            # print the book number, then print the book title at the position
+            print(f"{index +1}. {library[index]}")
+
 def main():
     library = []
     display_menu()
     add_book(library)
+    list_books(library)
 
 if __name__ == "__main__":
     main()
