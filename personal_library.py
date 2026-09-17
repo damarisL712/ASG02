@@ -66,16 +66,29 @@ def list_books(library):
 
     parameters: 
         Library: A list containing book titles
-        
+    
+    returns: 
+        none 
     '''
     if len(library) == 0:
         # make this print statement is the there is nothing in the library
         print("Your library is empty")
     else:
+        print("\n==== Your Library ====")
         for index in range(len(library)):
             # print the book number, then print the book title at the position
             print(f"{index +1}. {library[index]}")
 
+def remove_books(library):
+    '''
+    removes any books that are in the library function if asked
+
+    parameters: 
+        Library: A list containing book titles 
+
+    returns:
+    '''
+    # commit test
 def main():
     library = []
     display_menu()
