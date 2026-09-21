@@ -92,9 +92,13 @@ def list_books(library):
         print("Your library is empty")
     else:
         print("\n==== Your Library ====")
-        for index in range(len(library)):
+
+        # sort the book titles in the library by alphabetical order
+        sorted_library = sorted(library)
+    
+        for index in range(len(sorted_library)):
             #get the entire tuple for one book 
-            book = library[index]
+            book = sorted_library[index]
             # pull the title, author, and year from the book tuple
             print(f"{index + 1}. {book[0]} by {book[1]} ({book[2]})")
 
