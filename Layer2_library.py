@@ -98,6 +98,7 @@ def remove_books(library):
         Library: A list containing book titles 
 
     returns:
+        none
     '''
     title = input("Enter the book title you want to remove: ")
 
@@ -120,14 +121,14 @@ def search_book_title(library):
         library: a list containing book title
     return:
         '''
-    search_book_title = input("Enter a title to search: ")
+    title = input("Enter a title to search: ")
 
-    # if the book was found was in the library
-    if search_book_title in library: 
-        # print that the book was found
-        print(f"we found the book {search_book_title} in your library")
-    else: 
-        print(f"{search_book_title} was not found in your library")
+    for book in library: 
+        if book[0] == title:
+            print(f"{book[0]} by {book[1]} ({book[2]}) was found")
+            return
+
+    print(f"{title} was not found in your library")
 
 
 
