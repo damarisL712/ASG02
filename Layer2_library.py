@@ -101,14 +101,15 @@ def remove_books(library):
     '''
     title = input("Enter the book title you want to remove: ")
 
-    # if the title is in the library
-    if title in library:
-        # remove it from the library
-        library.remove(title)
-        # print that it was removed
-        print(f"{title} was remove from your library")
-    else:
-        print(f"{title} was not found in your library. Try again :(")
+    # looop through each book in the library
+    for book in library:
+        # checks if the first value in the tuple matches the title
+        if book[0] == title:
+            library.remove(book)
+            print(f"{title} was removed from your library")
+            # stop the function after the book that matches is removed
+            return
+    print(f"{title} was not found in your library. Try again :(")
 
 
 def search_book_title(library):
