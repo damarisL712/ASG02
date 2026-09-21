@@ -66,7 +66,7 @@ def add_book(library):
     library.append(book)
 
     # print that the title, author, and year was added to the library
-    print(f"{title} by {author} ({year}) was added to your library")
+    print(f"\"{title}\" was added to your library")
 
 
 def list_books(library):
@@ -85,9 +85,10 @@ def list_books(library):
     else:
         print("\n==== Your Library ====")
         for index in range(len(library)):
-            # print the book number, then print the book title at the position
-            print(f"{index + 1}. {library[index]}")
-
+            #get the entire tuple for one book 
+            book = library[index]
+            # pull the title, author, and year from the book tuple
+            print(f"{index + 1}. {book[0]} by {book[1]} ({book[2]})")
 
 def remove_books(library):
     '''
@@ -120,7 +121,9 @@ def search_book_title(library):
         '''
     search_book_title = input("Enter a title to search: ")
 
+    # if the book was found was in the library
     if search_book_title in library: 
+        # print that the book was found
         print(f"we found the book {search_book_title} in your library")
     else: 
         print(f"{search_book_title} was not found in your library")
