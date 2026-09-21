@@ -98,7 +98,7 @@ def list_books(library):
             # pull the title, author, and year from the book tuple
             print(f"{index + 1}. {book[0]} by {book[1]} ({book[2]})")
 
-def remove_books(library):
+def remove_books(library,titles):
     '''
     removes any books that are in the library function if asked
 
@@ -115,6 +115,8 @@ def remove_books(library):
         # checks if the first value in the tuple matches the title
         if book[0] == title:
             library.remove(book)
+            # remove title from the set
+            titles.remove(title)
             print(f"{title} was removed from your library")
             # stop the function after the book that matches is removed
             return
@@ -162,7 +164,7 @@ def main():
         if choice == "1":
             add_book(library,titles)
         elif choice == "2":
-            remove_books(library)
+            remove_books(library,titles)
         elif choice == "3":
             list_books(library)
         elif choice == "4":
