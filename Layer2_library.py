@@ -43,30 +43,38 @@ def display_menu():
     print("5. Exit")
 
 
-def add_book(library):
+def add_book(library,titles):
     '''
     add a book title to the library 
 
     parameters: 
         Library: A list containing book titles
 
+        titles: a set containing different book title names
+
     returns:
         none 
     '''
     title = input("Enter a book title: ")
 
-    author = input("Enter the book author: ")
+    if title in titles:
+        print(f"{title} is already in your library. Try again")
+    else:
+        author = input("Enter the book author: ")
 
-    year = int(input("Enter the publication year: "))
+        year = int(input("Enter the publication year: "))
 
-    # creates a tutple that containig all information on the book
-    book = (title,author,year)    
+        # creates a tutple that containig all information on the book
+        book = (title,author,year)    
 
-    # add users input on book to the library list
-    library.append(book)
+        # add users input on book to the library list
+        library.append(book)
 
-    # print that the title, author, and year was added to the library
-    print(f"\"{title}\" was added to your library")
+        # take what the user entered for title and add it to the titles set
+        titles.add(title)
+
+        # print that the title, author, and year was added to the library
+        print(f"\"{title}\" was added to your library")
 
 
 def list_books(library):
@@ -122,14 +130,16 @@ def search_book_title(library):
     return:
         '''
     title = input("Enter a title to search: ")
-
+    
+    # loops through each book in the library
     for book in library: 
+
+        # if the first value in the tuple matches what the user entered as title
         if book[0] == title:
             print(f"{book[0]} by {book[1]} ({book[2]}) was found")
             return
 
     print(f"{title} was not found in your library")
-
 
 
 def main():
@@ -142,11 +152,15 @@ def main():
         none
     '''
     library = []
+
+    # create a set to prevent duplicate book titles
+    titles = set()
+
     display_menu()
     choice = input("Choose an option from the list:")
     while choice != "5":
         if choice == "1":
-            add_book(library)
+            add_book(library,titles)
         elif choice == "2":
             remove_books(library)
         elif choice == "3":
