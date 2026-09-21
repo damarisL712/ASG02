@@ -42,6 +42,7 @@ def display_menu():
     print("4. Search a book title")
     print("5. Exit")
 
+
 def add_book(library):
     '''
     add a book title to the library 
@@ -60,6 +61,7 @@ def add_book(library):
     # print that the title was added to the library
     print(f"{title} was added to your library")
 
+
 def list_books(library):
     '''
     Displays all books that are in the library 
@@ -77,7 +79,8 @@ def list_books(library):
         print("\n==== Your Library ====")
         for index in range(len(library)):
             # print the book number, then print the book title at the position
-            print(f"{index + 1 }. {library[index]}")
+            print(f"{index + 1}. {library[index]}")
+
 
 def remove_books(library):
     '''
@@ -90,22 +93,62 @@ def remove_books(library):
     '''
     title = input("Enter the book title you want to remove: ")
 
+    # if the title is in the library
     if title in library:
+        # remove it from the library
         library.remove(title)
+        # print that it was removed
         print(f"{title} was remove from your library")
     else:
         print(f"{title} was not found in your library. Try again :(")
 
+
+def search_book_title(library):
+    '''
+    search for a book title in the library
+
+    parameters:
+        library: a list containing book title
+    return:
+        '''
+    search_book_title = input("Enter a title to search: ")
+
+    if search_book_title in library: 
+        print(f"we found the book {search_book_title} in your library")
+    else: 
+        print(f"{search_book_title} was not found in your library")
+
+
+
 def main():
+    '''
+    runs the personal library manager
+
+    parameters:
+        none
+    returns: 
+        none
+    '''
     library = []
     display_menu()
     choice = input("Choose an option from the list:")
-    if choice == "1":
-        add_book(library)
-    elif choice == "2":
-        lists_books(library)
-    elif choice == "3":
-        remove_books(library)
+    while choice != "5":
+        if choice == "1":
+            add_book(library)
+        elif choice == "2":
+            remove_books(library)
+        elif choice == "3":
+            list_books(library)
+        elif choice == "4":
+            search_book_title(library)
+        else:
+            print("What you chose is not on the list")
+
+        # display menu after completing an action
+        display_menu()
+        # ask the user to enter another option after the action was complete
+        choice = input("Choose an option from the list:")
+    print("You chose to exit. Cya!")
 
 if __name__ == "__main__":
     main()
