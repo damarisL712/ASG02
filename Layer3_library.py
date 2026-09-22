@@ -118,24 +118,31 @@ def list_books(library):
     Displays all books that are in the library 
 
     parameters: 
-        Library: A list containing book tuple
+        Library: a dictionary containing book info
     
     returns: 
         none 
     '''
+    # if library is empty
     if len(library) == 0:
-        # make this print statement is the there is nothing in the library
+        # tell user library is empty
         print("Your library is empty")
     else:
         print("\n==== Your Library ====")
 
         # sort the book titles in the library by alphabetical order
-        sorted_library = sorted(library,key=lambda book: book[0].lower())
-        for index in range(len(sorted_library)):
-            #get the entire tuple for one book 
-            book = sorted_library[index]
+        sorted_titles = sorted(library,key=lambda title: title.lower())
+
+        for index in range(len(sorted_titles)):
+            # get the book title at its positon
+            title = sorted_titles[index]
+
+            #get the author and year from the current title
+            author = library[title]["author"]
+            year = library[title]['year']
+
             # pull the title, author, and year from the book tuple
-            print(f"{index + 1}. {book[0]} by {book[1]} ({book[2]})")
+            print(f"{index + 1}. {title} by {author} ({year})")
 
 def remove_books(library,titles):
     '''
@@ -231,8 +238,6 @@ def main():
     while choice != "6":
         if choice == "1":
             add_or_update_book(library)
-            # testing if adding or updating a title updates the dictionary properly
-            print(library)
         elif choice == "2":
             remove_books(library,titles)
         elif choice == "3":
