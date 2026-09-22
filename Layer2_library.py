@@ -1,26 +1,52 @@
 """
-Layer 1: Personal Library Manager - List of Titles
-=====================================================
+Layer 2: Personal Library Manager - Tuples, Sets, Sorting, and Comprehensions
+============================================================================
+
 Purpose
 -------
-This is the FIRST layer of the Personal Library Manager project.
-The goal here is not efficiency or good design -- it is to practice
-basic Python control flow (loops, conditionals) and basic list
-operations before introducing more advanced data structures.
+This is the SECOND layer of the Personal Library Manager project.
+The goal of this layer is to improve the program by storing more
+information about each book and introducing additional Python data
+structures.
+
+Each book now stores a title, author, and publication year inside
+a tuple. A set is used to keep track of unique book titles and help
+prevent duplicates. The program also sorts books alphabetically and
+uses a list comprehension to analyze the library by identifying books
+published before the year 2000.
 
 Data Model
 ----------
-The entire library is represented as a single list of strings:
+The library is represented as a list of tuples:
 
-    library = ["Dune", "1984", "The Hobbit"]
+    library = [
+        ("Dune", "Frank Herbert", 1965),
+        ("1984", "George Orwell", 1949)
+    ]
 
-Limitations (intentional, to motivate Layer 2)
------------------------------------------------
-- Only the title is stored; there is no place for author or year.
-- Checking for a duplicate title requires an O(n) linear scan.
-- There is no structure for "author" statistics at all.
+A separate set stores the book titles:
 
-These limitations are exactly why the project moves on to Layer 2.
+    titles = {"Dune", "1984"}
+
+Layer 2 Features
+----------------
+- Stores title, author, and publication year for each book.
+- Uses tuples to group information about each book.
+- Uses a set to prevent duplicate book titles.
+- Displays books in alphabetical order by title.
+- Allows books to be added, removed, listed, and searched.
+- Uses a list comprehension to identify classic books published
+  before the year 2000.
+
+Limitations
+-----------
+- The library is still stored as a list, so some operations require
+  searching through the list one book at a time.
+- The library data is not saved after the program closes.
+- Updating an existing book is not yet supported.
+
+These limitations help motivate Layer 3, where the program will use
+a dictionary-based design and file storage.
 """
 
 
@@ -49,7 +75,7 @@ def add_book(library,titles):
     add a book title to the library 
 
     parameters: 
-        Library: A list containing book titles
+        Library: A list containing book tuples
 
         titles: a set containing different book title names
 
@@ -83,7 +109,7 @@ def list_books(library):
     Displays all books that are in the library 
 
     parameters: 
-        Library: A list containing book titles
+        Library: A list containing book tuple
     
     returns: 
         none 
@@ -95,8 +121,7 @@ def list_books(library):
         print("\n==== Your Library ====")
 
         # sort the book titles in the library by alphabetical order
-        sorted_library = sorted(library)
-
+        sorted_library = sorted(library,key=lambda book: book[0].lower())
         for index in range(len(sorted_library)):
             #get the entire tuple for one book 
             book = sorted_library[index]
@@ -108,7 +133,7 @@ def remove_books(library,titles):
     removes any books that are in the library function if asked
 
     parameters: 
-        Library: A list containing book titles 
+        Library: A list containing book tuple 
 
     returns:
         none
@@ -133,7 +158,7 @@ def search_book_title(library):
     search for a book title in the library
 
     parameters:
-        library: a list containing book title
+        library: a list containing book tuple
     return:
         '''
     title = input("Enter a title to search: ")
@@ -150,7 +175,7 @@ def search_book_title(library):
 
 def older_books(library):
     '''
-    show books published anytime before the year 200
+    show books published anytime before the year 2000
     
     parameters:
         library: a list containing books
@@ -171,7 +196,7 @@ def older_books(library):
         else:
             print("\n==== Classic Books In Your Library ====")
 
-            # display each book before year 200
+            # display each book before year 2000
             for book in classic_books:
                 print(f"{book[0]} by {book[1]} ({book[2]})")
 
