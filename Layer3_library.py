@@ -57,7 +57,7 @@ Design Improvements
 - JSON file storage allows library data to persist between program
   runs.
 """
-
+import json
 
 def display_menu():
     '''
@@ -267,6 +267,24 @@ def author_stats(library):
             # display the author and the number of books they have in the library
             print(f"{author}: {author_counts[author]}")
 
+def save_library(library):
+    '''
+    save the library dictionary to a json file
+
+    parameters:
+        library: a dictionary containing book information
+    
+    returns
+        none
+    '''
+    # open the file for writing
+    with open("library_data.json", "w") as file:
+        # take the library dictionary and write it into the file
+        json.dump(library,file,indent = 2)
+    
+    # confirmation message
+    print("Library saved to library_data.json")
+
 def main():
     '''
     runs the personal library manager
@@ -302,8 +320,11 @@ def main():
 
         # display menu after completing an action
         display_menu()
+
         # ask the user to enter another option after the action was complete
         choice = input("Choose an option from the list:")
+    # save the data in the library before the program stops
+    save_library(library)
     print("You chose to exit. Cya!")
 
 if __name__ == "__main__":
