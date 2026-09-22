@@ -285,6 +285,27 @@ def save_library(library):
     # confirmation message
     print("Library saved to library_data.json")
 
+def load_library():
+    '''
+    load the library data from the json file
+
+    paramters:
+        none
+    returns:
+        the library dictionar
+    '''
+    try:
+        # open tthe json file for reading
+        with open("library_data.json", "r") as file:
+            # load the saved json daata into python
+            library = json.load(file)
+
+    except (json.JSONDecodeError, OSError):
+        # use empty dictionary if the file cannot be loaded
+        library = {}
+
+    return library
+
 def main():
     '''
     runs the personal library manager
@@ -295,7 +316,7 @@ def main():
         none
     '''
     # creates an empty dicitonary for book info
-    library = {}
+    library = load_library()
 
     # create a set to prevent duplicate book titles
     titles = set()
