@@ -76,7 +76,8 @@ def display_menu():
     print("3. List all book titles")
     print("4. Search a book title")
     print("5. Look at your classic books")
-    print("6. Exit")
+    print("6. Show author statistics")
+    print("7. Exit")
 
 
 def add_or_update_book(library):
@@ -232,7 +233,39 @@ def older_books(library):
                 # display matching book information 
                 print(f"{title} by {author} ({year})")
 
-                
+def author_stats(library):
+    '''
+    will display the number of books written by each author
+    
+    paramters:
+        library: a dictionary containing book information
+    
+    returns:
+        none
+    '''
+    if len(library) == 0:
+        print("your library is empty")
+    else:
+        # create a dictionary to store the number of books for each author
+        author_counts = {}
+
+        # loop through each book title
+        for title in library: 
+            # get the author from the current book
+            author = library [title]["author"]
+
+            # check if th author already has a counter going
+            if author in author_counts:
+                # increase the author's book count
+                author_counts[author] += 1
+            else:
+                author_counts[author] = 1
+        print("\n==== Books per author ====")
+
+        # display each author and their number of books
+        for author in author_counts:
+            # display the author and the number of books they have in the library
+            print(f"{author}: {author_counts[author]}")
 
 def main():
     '''
@@ -251,7 +284,7 @@ def main():
 
     display_menu()
     choice = input("Choose an option from the list:")
-    while choice != "6":
+    while choice != "7":
         if choice == "1":
             add_or_update_book(library)
         elif choice == "2":
@@ -262,6 +295,8 @@ def main():
             search_book_title(library)
         elif choice == "5":
             older_books(library)
+        elif choice == "6":
+            author_stats(library)
         else:
             print("What you chose is not on the list")
 
