@@ -82,7 +82,7 @@ def display_menu():
 
 def add_or_update_book(library):
     '''
-    add a new book or update an exisitng one in the library
+    add a new book or update an existing one in the library
 
     parameters: 
         Library: a dictionary containing book info
@@ -96,7 +96,7 @@ def add_or_update_book(library):
     # if the book title is already in the dictionary
     if title in library:
         # state that the book was updated
-        action = "Updated"
+        action = "updated"
     else:
         # state that the book was added
         action = "added"
@@ -135,14 +135,14 @@ def list_books(library):
         sorted_titles = sorted(library,key=lambda title: title.lower())
 
         for index in range(len(sorted_titles)):
-            # get the book title at its positon
+            # get the book title at its position
             title = sorted_titles[index]
 
             #get the author and year from the current title
             author = library[title]["author"]
             year = library[title]['year']
 
-            # pull the title, author, and year from the book tuple
+            # display the title, author, and year of the book
             print(f"{index + 1}. {title} by {author} ({year})")
 
 def remove_books(library):
@@ -158,7 +158,7 @@ def remove_books(library):
     title = input("Enter the book title you want to remove: ")
 
     if title in library: 
-        # remove the book using its its title
+        # remove the book using its title
         library.pop(title)
         print(f"{title} was removed from your library")
     else:
@@ -206,7 +206,7 @@ def older_books(library):
     show books published anytime before the year 2000
     
     parameters:
-        library: a dictionary containing book infromation
+        library: a dictionary containing book information
     
     returns:
         none
@@ -237,7 +237,7 @@ def author_stats(library):
     '''
     will display the number of books written by each author
     
-    paramters:
+    parameters:
         library: a dictionary containing book information
     
     returns:
@@ -289,15 +289,15 @@ def load_library():
     '''
     load the library data from the json file
 
-    paramters:
+    parameters:
         none
     returns:
         the library dictionary
     '''
     try:
-        # open tthe json file for reading
+        # open the json file for reading
         with open("library_data.json", "r") as file:
-            # load the saved json daata into python
+            # load the saved json data into python
             data = json.load(file)
         
         # make sure the saved data is actually dictionary
@@ -321,11 +321,11 @@ def main():
     returns: 
         none
     '''
-    # creates an empty dicitonary for book info
+    # load the saved library data
     library = load_library()
 
-    # create a set to prevent duplicate book titles
-    titles = set()
+    # display the number of books loaded from the json file
+    print(f"Loaded {len(library)} books from library_data.json")
 
     display_menu()
     choice = input("Choose an option from the list:")
