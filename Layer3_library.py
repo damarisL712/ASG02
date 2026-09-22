@@ -205,7 +205,7 @@ def older_books(library):
     show books published anytime before the year 2000
     
     parameters:
-        library: a list containing books
+        library: a dictionary containing book infromation
     
     returns:
         none
@@ -214,8 +214,8 @@ def older_books(library):
     if len(library) == 0:
         print("Your library is empty. Add some books and try again")
     else:
-        # creates a list of book published before year 2000
-        classic_books = [book for book in library if book[2]<2000]
+        # creates a list of books published before year 2000
+        classic_books = [title for title in library if library[title]["year"]<2000]
 
         # are there no classic books?
         if len(classic_books) == 0:
@@ -223,9 +223,15 @@ def older_books(library):
         else:
             print("\n==== Classic Books In Your Library ====")
 
-            # display each book before year 2000
-            for book in classic_books:
-                print(f"{book[0]} by {book[1]} ({book[2]})")
+            # display each classic book 
+            for title in classic_books:
+                # get the author and year from the current title
+                author = library[title]["author"]
+                year = library[title]["year"]
+
+                # display matching book information 
+                print(f"{title} by {author} ({year})")
+
                 
 
 def main():
