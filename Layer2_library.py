@@ -40,7 +40,8 @@ def display_menu():
     print("2. Remove a book")
     print("3. List all book titles")
     print("4. Search a book title")
-    print("5. Exit")
+    print("5. Look at your classic books")
+    print("6. Exit")
 
 
 def add_book(library,titles):
@@ -95,7 +96,7 @@ def list_books(library):
 
         # sort the book titles in the library by alphabetical order
         sorted_library = sorted(library)
-    
+
         for index in range(len(sorted_library)):
             #get the entire tuple for one book 
             book = sorted_library[index]
@@ -147,6 +148,33 @@ def search_book_title(library):
 
     print(f"{title} was not found in your library")
 
+def older_books(library):
+    '''
+    show books published anytime before the year 200
+    
+    parameters:
+        library: a list containing books
+    
+    returns:
+    
+    '''
+
+    if len(library) == 0:
+        print("Your library is empty. Add some books and try again")
+    else:
+        # creates a list of book published before year 2000
+        classic_books = [book for book in library if book[2]<2000]
+
+        # are there no classic books?
+        if len(classic_books) == 0:
+            print("You do not have any classic books stored")
+        else:
+            print("\n==== Classic Books In Your Library ====")
+
+            # display each book before year 200
+            for book in classic_books:
+                print(f"{book[0]} by {book[1]} ({book[2]})")
+
 
 def main():
     '''
@@ -164,7 +192,7 @@ def main():
 
     display_menu()
     choice = input("Choose an option from the list:")
-    while choice != "5":
+    while choice != "6":
         if choice == "1":
             add_book(library,titles)
         elif choice == "2":
@@ -173,6 +201,8 @@ def main():
             list_books(library)
         elif choice == "4":
             search_book_title(library)
+        elif choice == "5":
+            older_books(library)
         else:
             print("What you chose is not on the list")
 
