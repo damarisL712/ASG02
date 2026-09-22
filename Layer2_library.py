@@ -160,6 +160,7 @@ def search_book_title(library):
     parameters:
         library: a list containing book tuple
     return:
+        none
         '''
     title = input("Enter a title to search: ")
     
