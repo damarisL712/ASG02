@@ -144,37 +144,31 @@ def list_books(library):
             # pull the title, author, and year from the book tuple
             print(f"{index + 1}. {title} by {author} ({year})")
 
-def remove_books(library,titles):
+def remove_books(library):
     '''
     removes any books that are in the library function if asked
 
     parameters: 
-        Library: A list containing book tuple 
+        Library: a dictionary containing book information
 
     returns:
         none
     '''
     title = input("Enter the book title you want to remove: ")
 
-    # looop through each book in the library
-    for book in library:
-        # checks if the first value in the tuple matches the title
-        if book[0] == title:
-            library.remove(book)
-            # remove title from the set
-            titles.remove(title)
-            print(f"{title} was removed from your library")
-            # stop the function after the book that matches is removed
-            return
-    print(f"{title} was not found in your library. Try again :(")
-
+    if title in library: 
+        # remove the book using its its title
+        library.pop(title)
+        print(f"{title} was removed from your library")
+    else:
+        print(f"{title} was not found in your library")
 
 def search_book_title(library):
     '''
     search for a book title in the library
 
     parameters:
-        library: a list containing book tuple
+        library: a dictionary containing book tuple
     return:
         none
         '''
@@ -239,7 +233,7 @@ def main():
         if choice == "1":
             add_or_update_book(library)
         elif choice == "2":
-            remove_books(library,titles)
+            remove_books(library)
         elif choice == "3":
             list_books(library)
         elif choice == "4":
