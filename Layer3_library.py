@@ -292,13 +292,19 @@ def load_library():
     paramters:
         none
     returns:
-        the library dictionar
+        the library dictionary
     '''
     try:
         # open tthe json file for reading
         with open("library_data.json", "r") as file:
             # load the saved json daata into python
-            library = json.load(file)
+            data = json.load(file)
+        
+        # make sure the saved data is actually dictionary
+        if isinstance(data,dict):
+            library = data
+        else:
+            library = {}
 
     except (json.JSONDecodeError, OSError):
         # use empty dictionary if the file cannot be loaded
