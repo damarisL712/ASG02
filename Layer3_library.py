@@ -168,21 +168,37 @@ def search_book_title(library):
     search for a book title in the library
 
     parameters:
-        library: a dictionary containing book tuple
+        library: a dictionary containing book info
     return:
         none
         '''
-    title = input("Enter a title to search: ")
-    
-    # loops through each book in the library
-    for book in library: 
+    book_title = input("Enter a title to search: ")
 
-        # if the first value in the tuple matches what the user entered as title
-        if book[0] == title:
-            print(f"{book[0]} by {book[1]} ({book[2]}) was found")
-            return
+    # create a list to store matching book titles
+    similar_titles = []
 
-    print(f"{title} was not found in your library")
+    for title in library:
+        # check if the searched text appears in the title without case sensitivity
+        if book_title.lower() in title.lower():
+            # add the matching title to the list
+            similar_titles.append(title)
+
+    if len(similar_titles) == 0:
+        print("No matching books were found")
+    else: 
+        print("\n==== Search Results ====")
+
+        # show each matching book 
+        for index in range(len(similar_titles)):
+            title = similar_titles[index]
+
+            # get the author and year from the current title
+            author = library[title]["author"]
+            year = library[title]["year"]
+
+            # display matching book information 
+            print(f"{index + 1}. {title} by {author} ({year})")
+
 
 def older_books(library):
     '''
@@ -210,7 +226,7 @@ def older_books(library):
             # display each book before year 2000
             for book in classic_books:
                 print(f"{book[0]} by {book[1]} ({book[2]})")
-
+                
 
 def main():
     '''
