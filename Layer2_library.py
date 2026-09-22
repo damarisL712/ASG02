@@ -156,7 +156,7 @@ def older_books(library):
         library: a list containing books
     
     returns:
-    
+        none
     '''
 
     if len(library) == 0:
